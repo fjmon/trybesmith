@@ -1,6 +1,6 @@
+import { IProduct } from '../interfaces';
 import connection from '../models/connection';
 import ProductModel from '../models/product.model';
-import { IProduct } from '../interfaces/Product';
 
 export default class ProductService {
   public model: ProductModel;
@@ -13,7 +13,7 @@ export default class ProductService {
     return this.model.create(product);
   }
 
-  // public async getAllUsersService() {
-  //   return this.model.getAllUsersModel();
-  // }
+  public async getAllProductsService(): Promise<IProduct[]> {
+    return this.model.getAllProductsModel();    
+  }
 }
