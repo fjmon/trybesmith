@@ -1,19 +1,19 @@
-import { IProduct } from '../interfaces';
 import connection from '../models/connection';
 import ProductModel from '../models/product.model';
-
+import { IProduct } from '../interfaces';
+// fim
 export default class ProductService {
-  public model: ProductModel;
+  public productModel: ProductModel;
 
   constructor() {
-    this.model = new ProductModel(connection);
+    this.productModel = new ProductModel(connection);
   }
 
-  public create(product: IProduct): Promise<IProduct> {
-    return this.model.create(product);
+  public async create(product: IProduct): Promise<IProduct> {
+    return this.productModel.create(product);
   }
 
-  public async getAllProductsService(): Promise<IProduct[]> {
-    return this.model.getAllProductsModel();    
+  public async getAllProd(): Promise<IProduct[]> {
+    return this.productModel.getAllProd();    
   }
 }

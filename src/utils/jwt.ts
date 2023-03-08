@@ -1,13 +1,15 @@
-import jwt from 'jsonwebtoken';
-import { Payload } from '../interfaces';
+import jwt, { SignOptions } from 'jsonwebtoken';
+import { IUser } from '../interfaces';
 
-const JWT_SECRET = 'senha_secreta';
+const secret = process.env.JWT_SECRET || 'segredoSuperSecreto';
 
-const createToken = (body: Payload): string => {
-  const token = jwt.sign({ body }, JWT_SECRET, {
-    expiresIn: 'Id',
-  });
+export default (user: IUser) => {
+  const jwtConfig: SignOptions = {
+    expiresIn: '7d',
+    algorithm: 'HS256',
+  };
+
+  const token = jwt.sign({ data: user }, secret, jwtConfig);
+
   return token;
-};
-
-export default createToken;
+}; 

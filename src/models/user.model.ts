@@ -1,6 +1,6 @@
 import { Pool, ResultSetHeader } from 'mysql2/promise';
 import { IUser } from '../interfaces';
-
+// fim
 export default class UserModel {
   public connection: Pool;
 
@@ -8,14 +8,13 @@ export default class UserModel {
     this.connection = connection;
   }
 
-  public async create(body: IUser): Promise<IUser> {
-    const { username, classe, level, password } = body;
+  public async create(user: IUser): Promise<IUser> {
     const [dataInserted] = await this.connection.execute<ResultSetHeader>(
-      'INSERT INTO Trybesmith (username, classe, level, password) VALUES (?, ?, ?, ?)',
-      [username, classe, level, password],
+      'INSERT INTO Trybesmith.users (username, vocation, level, password) VALUES (?, ?, ?, ?)',
+      [user.username, user.vocation, user.level, user.password],
     );
 
     const { insertId } = dataInserted;
-    return { id: insertId, ...body };
+    return { id: insertId, ...user };
   }
 }

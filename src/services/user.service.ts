@@ -1,15 +1,15 @@
 import connection from '../models/connection';
 import UserModel from '../models/user.model';
 import { IUser } from '../interfaces';
-
+// fim  
 export default class UserService {
-  public model: UserModel;
+  public userModel: UserModel;
 
   constructor() {
-    this.model = new UserModel(connection);
+    this.userModel = new UserModel(connection);
   }
 
-  public create(body: IUser): Promise<IUser> {
-    return this.model.create(body);
+  public async create(body: IUser) {
+    return this.userModel.create(body);
   }
 }
